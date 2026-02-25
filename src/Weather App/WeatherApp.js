@@ -94,14 +94,14 @@ export default function WeatherApp() {
         height: "100vh",
       }}>
       <CssBaseline />
-      <Container maxWidth='sm'>
+      <Container maxWidth='sm' sx={{ padding: 0 }}>
         <Card
           sx={{
-            minWidth: 275,
+            minWidth: { xs: "100%", sm: 275 },
             bgcolor: "rgb(28 52 91 / 36%)",
             color: "white",
             boxShadow: "0 11px 1px rgba(0, 0, 0, 0.05)",
-            padding: "10px",
+            padding: { xs: "5px", sm: "10px" },
             borderRadius: "15px",
           }}
           dir={direction}>
@@ -109,11 +109,16 @@ export default function WeatherApp() {
             <Box
               sx={{
                 display: "flex",
-                alignItems: "end",
+                flexDirection: { xs: "column", sm: "row" },
+                alignItems: { xs: "start", sm: "end" },
               }}>
               <Typography
                 variant='h2'
-                sx={{ margin: "0 20px 0 0", fontWeight: 600 }}>
+                sx={{
+                  margin: "0 20px 0 0",
+                  fontWeight: 600,
+                  fontSize: { xs: "2rem", sm: "3.75rem" },
+                }}>
                 {t("Cairo")}
               </Typography>
               <Typography variant='h5' sx={{ margin: "0 20px 0 0" }}>
@@ -121,7 +126,15 @@ export default function WeatherApp() {
               </Typography>
             </Box>
             <Divider sx={{ bgcolor: "white" }} />
-            <Grid container spacing={2} sx={{ mt: "25px" }}>
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                mt: "25px",
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                alignItems: { xs: "center" },
+              }}>
               <Grid size={6}>
                 <div
                   style={{
@@ -130,35 +143,43 @@ export default function WeatherApp() {
                     alignItems: "center",
                   }}>
                   <Typography variant='h1'>{temp.number}</Typography>
-                  <img src={temp.icon} />
+
+                  <img src={temp.icon} alt='' />
                 </div>
                 <div
                   dir={direction}
                   style={{
                     width: "100%",
-                    display: "flex",
-                    justifyContent: "start",
                     marginTop: "15px",
                   }}>
                   <Typography variant='h6'>{t(temp.description)}</Typography>
+
+                  <Box
+                    sx={{
+                      display: { xs: "grid", sm: "flex" },
+                      justifyContent: { sm: "space-between" },
+                    }}>
+                    <Typography variant='h5'>
+                      {t("Min")} : {temp.min}
+                    </Typography>
+                    <Typography
+                      variant='h4'
+                      sx={{ display: { xs: "none", sm: "block" } }}>
+                      |
+                    </Typography>
+                    <Typography variant='h5'>
+                      {t("Max")} : {temp.max}
+                    </Typography>
+                  </Box>
                 </div>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}>
-                  <Typography variant='h5'>
-                    {t("Min")} : {temp.min}
-                  </Typography>
-                  <h2>|</h2>
-                  <Typography variant='h5'>
-                    {t("Max")} : {temp.max}
-                  </Typography>
-                </Box>
               </Grid>
               <Grid size={6}>
-                <CloudIcon sx={{ fontSize: "220px" }} />
+                <CloudIcon
+                  sx={{
+                    fontSize: "200px",
+                    display: { xs: "none", sm: "block" },
+                  }}
+                />
               </Grid>
             </Grid>
           </CardContent>
@@ -182,3 +203,4 @@ export default function WeatherApp() {
     </div>
   );
 }
+
