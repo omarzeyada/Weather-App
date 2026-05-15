@@ -15,7 +15,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className='App' style={{ margin: "20px" }}>
+      <div className='App'>
         <title>Weather App</title>
         <WeatherApp />
       </div>
